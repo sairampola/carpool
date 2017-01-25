@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+    <item android:title="    "
+        android:id="@+id/lol"
+        />
+
+    <item android:title="Profile"
+          android:id="@+id/nav_item_profile"
+
+          android:icon="@drawable/nav_profile"/>
+
+    <item android:title="Notifications"
+          android:id="@+id/nav_item_noti"
+          android:icon="@drawable/nav_notifcation"/>
+
+    <item android:title="Your Rides"
+          android:id="@+id/nav_item_yori"
+          android:icon="@drawable/nav_rides"/>
+
+    <item android:title="Company Group"
+        android:id="@+id/nav_item_cogr"
+        android:icon="@drawable/nav_group"/>
+
+    <item android:title="Send Location"
+        android:id="@+id/nav_item_selo"
+        android:icon="@drawable/nav_sendlocation"/>
+
+    <item android:title="Rate Card"
+        android:id="@+id/nav_item_raca"
+        android:icon="@drawable/nav_ratecard"/>
+
+    <item android:title="Logout"
+        android:id="@+id/nav_item_logout"
+        android:icon="@drawable/nav_logout"/>
+
+
+</menu>

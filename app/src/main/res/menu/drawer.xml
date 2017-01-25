@@ -1,0 +1,34 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <item android:title="Inbox"  android:icon="@drawable/nav_logout" ></item>
+    <item android:title="Inbox"  android:icon="@drawable/nav_logout" ></item>
+
+    <item android:title="Compose" android:id="@+id/navigation_item_2" android:icon="@drawable/nav_logout"></item>
+            <item android:title="Inbox"  android:icon="@drawable/nav_logout" ></item>
+            <item android:title="Sent" android:icon="@drawable/nav_logout"></item>
+            <item android:title="Drafts" android:icon="@drawable/nav_logout"></item>
+
+
+
+
+    <item android:title="Others">
+        <menu>
+            <item
+                android:title="Spam" android:icon="@drawable/nav_logout"/>
+            <item
+                android:title="Bin" android:icon="@drawable/nav_logout"/>
+        </menu>
+    </item>
+
+    <group android:id="@+id/shitss">
+
+            <item android:title="Settings" android:icon="@drawable/nav_logout"></item>
+            <item android:title="Help" android:icon="@drawable/nav_logout"></item>
+    </group>
+
+
+
+
+
+</menu>
