@@ -10,12 +10,17 @@ android {
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    dexOptions {
+
+        javaMaxHeapSize "2048M"
     }
 }
 
@@ -28,4 +33,7 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.android.support:support-v4:+'
     compile files('libs/imageviewpopuphelper-0.1.1.jar')
+    compile 'com.google.android.gms:play-services:+'
+    compile 'com.android.support:multidex:1.0.1'
+
 }

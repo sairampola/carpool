@@ -33,6 +33,7 @@
                 android:layout_marginLeft="12dp"
                 android:paddingRight="10dp"
                 android:textSize="15sp"
+                android:hint="Enter Name Here"
                 android:id="@+id/nm"
                 android:text=""
                 android:layout_marginStart="12dp"
@@ -41,7 +42,7 @@
                 android:layout_alignParentStart="true" />
 
             <TextView
-                android:text="Phone"
+                android:text="Phone Number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
@@ -60,6 +61,7 @@
                 android:paddingRight="10dp"
                 android:textSize="15sp"
                 android:id="@+id/ph"
+                android:hint="Enter Phone Number Here"
                 android:text=""
                 android:layout_marginStart="12dp"
                 android:layout_alignParentBottom="true"
@@ -86,6 +88,7 @@
                 android:paddingRight="10dp"
                 android:textSize="15sp"
                 android:id="@+id/em"
+                android:hint="Enter Email Here"
                 android:text=""
                 android:layout_marginStart="12dp"
                 android:layout_alignParentBottom="true"
@@ -159,10 +162,116 @@
                 android:textSize="15sp"
                 android:id="@+id/pw"
                 android:text=""
+                android:hint="Enter Password Here"
                 android:layout_marginStart="12dp"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
+
+
+            <TextView
+                android:text="Home Address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:paddingRight="10dp"
+                android:textSize="20sp"
+                android:id="@+id/h_addr"
+                android:layout_marginStart="12dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+
+            <AutoCompleteTextView
+                android:id="@+id/hometv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+
+                android:layout_marginLeft="12dp"
+                android:textSize="15sp"
+                android:paddingRight="10dp"
+                android:hint="Enter Place Here"/>
+
+
+
+
+
+            <TextView
+                android:text="Company Address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:paddingRight="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="20sp"
+                android:id="@+id/c_addr"
+                android:layout_marginStart="12dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+
+            <AutoCompleteTextView
+                android:id="@+id/companytv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+
+                android:layout_marginLeft="12dp"
+                android:textSize="15sp"
+                android:paddingRight="10dp"
+                android:hint="Enter Place Here"/>
+            <TextView
+                android:text="License"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:paddingRight="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="20sp"
+                android:id="@+id/licensetv"
+                android:layout_marginStart="12dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+            <Button
+                android:text="Upload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:id="@+id/up_lic"
+                 />
+            <TextView
+                android:text="Profile Pic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:paddingRight="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="20sp"
+                android:id="@+id/profiletv"
+                android:layout_marginStart="12dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+            <Button
+                android:text="Upload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:id="@+id/up_pic"
+                />
+
+            <Button
+                android:text="Submit "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="150dp"
+                android:id="@+id/regsub"
+                />
+
 
 
 
