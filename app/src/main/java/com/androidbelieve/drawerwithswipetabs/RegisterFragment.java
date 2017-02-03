@@ -18,9 +18,18 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.places.Places;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+
+import cz.msebera.android.httpclient.Header;
 
 import static android.app.Activity.RESULT_OK;
 import static com.androidbelieve.drawerwithswipetabs.MainActivity.BOUNDS_INDIA;
@@ -39,7 +48,7 @@ public class RegisterFragment extends Fragment {
     AutoCompleteTextView h_addr,c_addr;
     RadioGroup gen;
     Button up_lic,up_pro,reg_sub;
-    String uploadL,uploadP,addrH,addrC;
+    String uploadL,uploadP,addrH,addrC,Gender;
 
     @Nullable
     @Override
@@ -63,7 +72,22 @@ public class RegisterFragment extends Fragment {
         uploadP="null";
         addrC ="null";
         addrH = "null";
+        Gender = "male";
         reg_sub=(Button)view.findViewById(R.id.regsub);
+        ////////////radiogrp//////////
+        gen.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if(checkedId == R.id.malegen) {
+                    Gender="male";
+
+                } else {
+                    Gender="female";
+
+                }
+            }
+        });
+        //////////------radiogrp//////
         ///////////////places api////////////////
         mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
                 .addApi(Places.GEO_DATA_API)
@@ -94,6 +118,56 @@ public class RegisterFragment extends Fragment {
         });
         /////////////-------upload image//////////
 
+
+
+        /////register ///////////////
+        reg_sub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                AsyncHttpClient client = new AsyncHttpClient();
+                RequestParams rp = new RequestParams();
+                rp.put("name",name.getText().toString());
+                rp.put("phone",phone.getText().toString());
+                rp.put("email",email.getText().toString());
+                rp.put("password",password.getText().toString());
+                rp.put("gender",Gender);
+                rp.put("company_address",addrC);
+                rp.put("home_address",addrH);
+                if(uploadL.equals("null"))
+                    rp.put("license","null");
+                else
+                    try {
+                        rp.put("license",new File(uploadL));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                if(uploadP.equals("null"))
+                    rp.put("user_img","null");
+                else
+                    try {
+                        rp.put("user_img",new File(uploadP));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+
+                client.post(AGlobal.url + "register", rp,new AsyncHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                        Toast.makeText(getContext(),"haaaa",Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                        Toast.makeText(getContext(),"hmmmm",Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+
+
+        //////////--------register//////////////
 
 
     }

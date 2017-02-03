@@ -5,5 +5,5 @@ package com.androidbelieve.drawerwithswipetabs;
  */
 
 public class AGlobal {
-    static String url ="http://10.10.64.204:3000/";
+    static String url ="http://10.10.64.248:3000/";
 }
