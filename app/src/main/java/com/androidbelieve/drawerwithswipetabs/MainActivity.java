@@ -1,5 +1,7 @@
 package com.androidbelieve.drawerwithswipetabs;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements
     NavigationView mNavigationView;
     FragmentManager mFragmentManager;
     FragmentTransaction mFragmentTransaction;
+    MenuItem lolgin;
     Toolbar toolbar;
      static final String LOG_TAG = "MainActivity";
      static final int GOOGLE_API_CLIENT_ID = 0;
@@ -36,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        final SharedPreferences prefs = getSharedPreferences("carpool", MODE_PRIVATE);
+         final int status = prefs.getInt("status",0);
 
         /**
          *Setup the DrawerLayout and NavigationView
@@ -55,55 +60,92 @@ public class MainActivity extends AppCompatActivity implements
         /**
          * Setup click events on the Navigation View Items.
          */
+
+
         toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
+        if(status==0){
+            FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.containerView,new LoginFragment()).commit();
+            toolbar.setTitle("CarPool");
+        }
+        lolgin = mNavigationView.getMenu().findItem(R.id.nav_item_logout);
+        if(mNavigationView.getMenu() != null){
+
+            if(status==0){
+                lolgin.setTitle("LogIn");
+
+            }
+            else{
+                lolgin.setTitle("LogOut");
+            }
+
+
+        }
              mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
              @Override
              public boolean onNavigationItemSelected(MenuItem menuItem) {
                 mDrawerLayout.closeDrawers();
 
+                 int status = prefs.getInt("status",0);
 
-                 if (menuItem.getItemId() == R.id.nav_item_home) {
+                 if (menuItem.getItemId() == R.id.nav_item_home&&status==1) {
                      FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
                      fragmentTransaction.replace(R.id.containerView,new HomeFragment()).commit();
                      toolbar.setTitle("CarPool");
                  }
 
 
-                 if (menuItem.getItemId() == R.id.nav_item_logout) {
+                 if (menuItem.getItemId() == R.id.nav_item_logout &&status ==0) {
                      FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
                      fragmentTransaction.replace(R.id.containerView,new LoginFragment()).commit();
                         toolbar.setTitle("CarPool");
                  }
+                 if (menuItem.getItemId() == R.id.nav_item_logout &&status ==1) {
+                     SharedPreferences.Editor editor = getSharedPreferences("carpool", MODE_PRIVATE).edit();
+                     editor.putInt("status",0);
+                     editor.commit();
+                     Intent intent = getIntent();
+                     finish();
+                     startActivity(intent);
 
-                if (menuItem.getItemId() == R.id.nav_item_profile) {
+                 }
+
+                if (menuItem.getItemId() == R.id.nav_item_profile&&status==1) {
                     FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
                     xfragmentTransaction.replace(R.id.containerView,new ProfileFragment()).commit();
                     toolbar.setTitle("Profile");
                 }
-                 if (menuItem.getItemId() == R.id.nav_item_noti) {
+                 if (menuItem.getItemId() == R.id.nav_item_noti&&status==1) {
                      FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
                      xfragmentTransaction.replace(R.id.containerView,new NotificationsFragment()).commit();
                      toolbar.setTitle("Notifications");
                  }
-                 if (menuItem.getItemId() == R.id.nav_item_yori) {
+                 if (menuItem.getItemId() == R.id.nav_item_yori&&status==1) {
                      FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
                      xfragmentTransaction.replace(R.id.containerView,new YourRidesFragment()).commit();
                      toolbar.setTitle("Your Rides");
                  }
-                 if (menuItem.getItemId() == R.id.nav_item_cogr) {
+                 if (menuItem.getItemId() == R.id.nav_item_cogr&&status==1) {
                      FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
                      xfragmentTransaction.replace(R.id.containerView,new CompanyGrpFragment()).commit();
                      toolbar.setTitle("Company Group");
                  }
-                 if (menuItem.getItemId() == R.id.nav_item_selo) {
+                 if (menuItem.getItemId() == R.id.nav_item_selo&&status==1) {
                      FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
                      xfragmentTransaction.replace(R.id.containerView,new SendLocationFragment()).commit();
                      toolbar.setTitle("Send Location");
                  }
-                 if (menuItem.getItemId() == R.id.nav_item_raca) {
+                 if (menuItem.getItemId() == R.id.nav_item_raca&&status==1 ){
                      FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
                      xfragmentTransaction.replace(R.id.containerView,new RateCardFragment()).commit();
                      toolbar.setTitle("Rate Card");
+                 }
+
+                 if(status==0 && menuItem.getItemId() != R.id.nav_item_logout){
+                     Toast.makeText(getApplicationContext(),"Please Login first!",Toast.LENGTH_SHORT).show();
+                     FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+                     fragmentTransaction.replace(R.id.containerView,new LoginFragment()).commit();
+                     toolbar.setTitle("CarPool");
                  }
 
                  return false;
@@ -116,6 +158,7 @@ public class MainActivity extends AppCompatActivity implements
          */
 
 
+        if(status==1){
                 ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this,mDrawerLayout, toolbar,R.string.app_name,
                 R.string.app_name);
 
@@ -123,7 +166,7 @@ public class MainActivity extends AppCompatActivity implements
                 toolbar.setTitle("CarPool");
                 mDrawerLayout.setDrawerListener(mDrawerToggle);
 
-                mDrawerToggle.syncState();
+                mDrawerToggle.syncState();}
 
     }
     public void setlolbar(String title){

@@ -1,5 +1,7 @@
 package com.androidbelieve.drawerwithswipetabs;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -24,6 +26,8 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by Ratan on 7/29/2015.
@@ -65,7 +69,7 @@ public class LoginFragment extends Fragment {
                 final String emaillol,passwordlol;
                 emaillol = em.getText().toString();
                 passwordlol = pw.getText().toString();
-                String url = "http://10.10.64.109:3000/login";
+                String url = AGlobal.url+"login";
                 ////////////////////////////
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                         new Response.Listener<String>() {
@@ -80,6 +84,17 @@ public class LoginFragment extends Fragment {
                                     if(status ==0)
                                     {
                                         ((MainActivity)getActivity()).setlolbar("CarPool");
+                                        SharedPreferences.Editor editor = getContext().getSharedPreferences("carpool", MODE_PRIVATE).edit();
+                                        editor.putString("email", emaillol);
+                                        editor.putInt("status",1);
+                                        editor.commit();
+                                        Intent intent = getActivity().getIntent();
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK
+                                                | Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                                        getActivity().overridePendingTransition(0, 0);
+                                        getActivity().finish();
+                                        getActivity().overridePendingTransition(0, 0);
+                                        startActivity(intent);
                                         FragmentManager fm=getFragmentManager();
                                         FragmentTransaction ft=fm.beginTransaction();
                                         ft.replace(R.id.containerView,new HomeFragment()).commit();

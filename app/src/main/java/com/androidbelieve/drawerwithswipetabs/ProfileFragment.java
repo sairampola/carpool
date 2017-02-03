@@ -1,6 +1,7 @@
 package com.androidbelieve.drawerwithswipetabs;
 
 import android.app.Application;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -30,6 +31,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import static android.content.Context.MODE_PRIVATE;
+
 /**
  * Created by Ratan on 7/29/2015.
  */
@@ -58,6 +61,8 @@ public class ProfileFragment extends Fragment {
         gen=(TextView)view.findViewById(R.id.gender);
         ha=(TextView)view.findViewById(R.id.homeadrr);
         ca=(TextView)view.findViewById(R.id.compaddr);
+        final SharedPreferences prefs = getContext().getSharedPreferences("carpool", MODE_PRIVATE);
+        final String emaill = prefs.getString("email","lol");
 
         final String url = AGlobal.url;
 
@@ -79,8 +84,8 @@ public class ProfileFragment extends Fragment {
                             gen.setText("Gender: "+jo.getString("gender"));
                             ha.setText("Home Address: "+jo.getString("home_address"));
                             ca.setText("Company Address: "+jo.getString("company_address"));
-                            Glide.with(getActivity()).load(url+jo.getString("user_img")).placeholder(R.drawable.loading).fitCenter().into(ui);
-                            Glide.with(getActivity()).load(url+jo.getString("license")).placeholder(R.drawable.loading).fitCenter().into(li);
+                            Glide.with(getActivity()).load(url+jo.getString("user_img")).fitCenter().into(ui);
+                            Glide.with(getActivity()).load(url+jo.getString("license")).fitCenter().into(li);
                             ui.setOnClickListener(new View.OnClickListener()
                             {
                                 @Override public void onClick(View v) {
@@ -118,9 +123,7 @@ public class ProfileFragment extends Fragment {
                 final Map<String, String> params = new HashMap<String, String>();
                 //params.put("name", "Androidhive");
 
-                params.put("email", "spp@spp.com");
-
-                //params.put("password", "password123");
+                params.put("email", emaill);
 
                 return params;
             }

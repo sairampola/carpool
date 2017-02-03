@@ -7,7 +7,7 @@
     <ImageView
         android:layout_width="150dp"
         android:layout_height="150dp"
-        app:srcCompat="@mipmap/ic_launcher"
+        app:srcCompat="@drawable/loading"
         android:layout_marginTop="22dp"
         android:id="@+id/userimg"
         android:adjustViewBounds="true"
@@ -129,7 +129,7 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:adjustViewBounds="true"
-                app:srcCompat="@mipmap/ic_launcher"
+                app:srcCompat="@drawable/loading"
                 android:layout_marginTop="22dp"
                 android:id="@+id/licenseimg"
                 android:layout_marginLeft="20dp"
