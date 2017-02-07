@@ -1,6 +1,5 @@
 package com.androidbelieve.drawerwithswipetabs;
 
-import android.*;
 import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -26,9 +25,8 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 
-public class MainActivity extends AppCompatActivity implements
-        GoogleApiClient.OnConnectionFailedListener,
-        GoogleApiClient.ConnectionCallbacks{
+
+public class MainActivity extends AppCompatActivity {
     DrawerLayout mDrawerLayout;
     NavigationView mNavigationView;
     FragmentManager mFragmentManager;
@@ -37,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements
     Toolbar toolbar;
      static final String LOG_TAG = "MainActivity";
      static final int GOOGLE_API_CLIENT_ID = 0;
-     static GoogleApiClient mGoogleApiClient;
+    static   GoogleApiClient mGoogleApiClient;
      static PlaceArrayAdapter mPlaceArrayAdapter;
     static final LatLngBounds BOUNDS_INDIA = new LatLngBounds(new LatLng(23.63936, 68.14712), new LatLng(28.20453, 97.34466));
     @Override
@@ -46,6 +44,11 @@ public class MainActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_main);
         final SharedPreferences prefs = getSharedPreferences("carpool", MODE_PRIVATE);
          final int status = prefs.getInt("status",0);
+
+
+
+
+
 
 
         /////////////runtime permission////////////
@@ -186,7 +189,7 @@ public class MainActivity extends AppCompatActivity implements
     public void setlolbar(String title){
         toolbar.setTitle(title);
     }
-
+/*
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         mPlaceArrayAdapter.setGoogleApiClient(mGoogleApiClient);
@@ -210,7 +213,7 @@ public class MainActivity extends AppCompatActivity implements
                 "Google Places API connection failed with error code:" +
                         connectionResult.getErrorCode(),
                 Toast.LENGTH_LONG).show();
-    }
+    }*/
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {

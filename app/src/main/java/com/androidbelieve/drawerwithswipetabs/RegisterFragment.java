@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -20,6 +21,7 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.places.Places;
 import com.loopj.android.http.AsyncHttpClient;
@@ -33,15 +35,14 @@ import cz.msebera.android.httpclient.Header;
 
 import static android.app.Activity.RESULT_OK;
 import static com.androidbelieve.drawerwithswipetabs.MainActivity.BOUNDS_INDIA;
-import static com.androidbelieve.drawerwithswipetabs.MainActivity.GOOGLE_API_CLIENT_ID;
 import static com.androidbelieve.drawerwithswipetabs.MainActivity.LOG_TAG;
-import static com.androidbelieve.drawerwithswipetabs.MainActivity.mGoogleApiClient;
-import static com.androidbelieve.drawerwithswipetabs.MainActivity.mPlaceArrayAdapter;
 
 /**
  * Created by Ratan on 7/29/2015.
  */
-public class RegisterFragment extends Fragment {
+public class RegisterFragment extends Fragment implements
+        GoogleApiClient.OnConnectionFailedListener,
+        GoogleApiClient.ConnectionCallbacks{
 
 
     EditText name,phone,email,password;
@@ -49,6 +50,9 @@ public class RegisterFragment extends Fragment {
     RadioGroup gen;
     Button up_lic,up_pro,reg_sub;
     String uploadL,uploadP,addrH,addrC,Gender;
+    static final int GOOGLE_API_CLIENT_ID = 2;
+    static GoogleApiClient mGoogleApiClient;
+    static PlaceArrayAdapter mPlaceArrayAdapter;
 
     @Nullable
     @Override
@@ -83,17 +87,20 @@ public class RegisterFragment extends Fragment {
 
                 } else {
                     Gender="female";
-
                 }
             }
         });
         //////////------radiogrp//////
         ///////////////places api////////////////
-        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
-                .addApi(Places.GEO_DATA_API)
-                .enableAutoManage(getActivity(), GOOGLE_API_CLIENT_ID, (MainActivity)getActivity())
-                .addConnectionCallbacks((MainActivity)getActivity())
-                .build();
+
+
+        try{
+            mGoogleApiClient = new GoogleApiClient.Builder(getContext())
+                    .addApi(Places.GEO_DATA_API)
+                    .enableAutoManage(getActivity(), GOOGLE_API_CLIENT_ID, this)
+                    .addConnectionCallbacks(this)
+                    .build();}
+        catch (Exception e){}
 
         h_addr.setOnItemClickListener(mAutocompleteClickListener);
         mPlaceArrayAdapter = new PlaceArrayAdapter(getContext(), android.R.layout.simple_list_item_1,
@@ -270,4 +277,43 @@ public class RegisterFragment extends Fragment {
     };
 
 
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        mPlaceArrayAdapter.setGoogleApiClient(mGoogleApiClient);
+        Log.i(LOG_TAG, "Google Places API connected.");
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+        mPlaceArrayAdapter.setGoogleApiClient(null);
+        Log.e(LOG_TAG, "Google Places API connection suspended.");
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+        Log.e(LOG_TAG, "Google Places API connection failed with error code: "
+                + connectionResult.getErrorCode());
+
+        Toast.makeText(getContext(),
+                "Google Places API connection failed with error code:" +
+                        connectionResult.getErrorCode(),
+                Toast.LENGTH_LONG).show();
+    }
+    public void onStop() {
+        super.onStop();
+        if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
+            mGoogleApiClient.stopAutoManage(getActivity());
+            mGoogleApiClient.disconnect();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
+            mGoogleApiClient.stopAutoManage(getActivity());
+            mGoogleApiClient.disconnect();
+        }
+    }
 }

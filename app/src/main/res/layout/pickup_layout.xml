@@ -3,27 +3,136 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:textSize="30sp"
-        android:gravity="center"
-        android:id="@+id/textView"
-        android:layout_centerHorizontal="true"
-        android:textColor="@android:color/holo_blue_dark"
-        android:text="pickup"/>
 
     <TextView
+        android:text="Source Address :"
+        android:textSize="20sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:autoLink="web"
-        android:textSize="15sp"
-        android:layout_marginTop="10dp"
-        android:layout_centerHorizontal="true"
-        android:text="androidbelieve.com"
-        android:textColor="#000"
-        android:layout_below="@+id/textView"
-        android:textStyle="italic"/>
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
+        android:id="@+id/saddrtv" />
+
+    <AutoCompleteTextView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/saddret"
+        android:paddingRight="10dp"
+        android:hint="Enter Place Here"
+        android:layout_marginRight="12dp"
+        android:layout_below="@+id/saddrtv"
+        android:layout_alignLeft="@+id/saddrtv"
+        android:layout_alignStart="@+id/saddrtv" />
+
+    <TextView
+        android:text="Destination Address :"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/saddret"
+        android:layout_alignLeft="@+id/saddret"
+        android:layout_alignStart="@+id/saddret"
+        android:id="@+id/daddrtv" />
+
+    <AutoCompleteTextView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/daddret"
+        android:paddingRight="10dp"
+        android:layout_marginRight="12dp"
+        android:hint="Enter Place Here"
+        android:layout_below="@+id/daddrtv"
+        android:layout_alignLeft="@+id/daddrtv"
+        android:layout_alignStart="@+id/daddrtv" />
+
+    <TextView
+        android:text="Gender Preference :"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/daddret"
+        android:layout_alignLeft="@+id/daddret"
+        android:layout_alignStart="@+id/daddret"
+        android:id="@+id/textView14" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView14"
+        android:layout_marginTop="12dp"
+        android:layout_alignLeft="@+id/textView14"
+        android:layout_alignStart="@+id/textView14"
+        android:id="@+id/radioGroup" >
+        <RadioButton
+            android:text="Male"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:id="@+id/male"
+            android:layout_below="@+id/radioGroup"
+            android:layout_toRightOf="@+id/radioGroup"
+            android:layout_toEndOf="@+id/radioGroup" />
+
+    <RadioButton
+        android:text="Female"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/female"
+        android:layout_alignLeft="@+id/textView14"
+        android:layout_alignStart="@+id/textView14"
+        android:layout_below="@+id/male" />
+        />
+    <RadioButton
+        android:text="No Preference"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/textView14"
+        android:layout_alignStart="@+id/textView14"
+        android:layout_below="@+id/female"
+        android:id="@+id/nop" />
+
+
+    </RadioGroup>
+
+    <TextView
+        android:text="Number of Seats Available :"
+        android:textSize="20sp"
+        android:layout_alignStart="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/radioGroup"
+        android:layout_toRightOf="@+id/radioGroup"
+        android:layout_toEndOf="@+id/radioGroup"
+        android:layout_marginTop="13dp"
+        android:id="@+id/seatstv"
+        android:layout_alignLeft="@+id/textView14" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:layout_below="@+id/seatstv"
+        android:layout_alignLeft="@+id/seatstv"
+        android:layout_alignStart="@+id/seatstv"
+        android:id="@+id/seatset" />
+
+    <Button
+        android:text="Submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:id="@+id/pickupsubmit"
+        android:layout_below="@+id/seatset"
+        android:layout_toRightOf="@+id/radioGroup"
+        android:layout_toEndOf="@+id/radioGroup" />
+
 
 </RelativeLayout>
