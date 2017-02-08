@@ -1,29 +1,23 @@
 package com.androidbelieve.drawerwithswipetabs;
 
-import android.app.Application;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
-import com.juliomarcos.ImageViewPopUpHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -76,7 +70,7 @@ public class ProfileFragment extends Fragment {
                         // Result handling
                         //Toast.makeText(getContext(),response,Toast.LENGTH_SHORT).show();
                         try {
-                            JSONObject jo= new JSONObject(response);
+                            final JSONObject jo= new JSONObject(response);
                             nm.setText("Name: "+jo.getString("name"));
                             em.setText("Email: "+jo.getString("email"));
                             ph.setText("Phone: "+jo.getString("phone"));
@@ -89,13 +83,27 @@ public class ProfileFragment extends Fragment {
                             ui.setOnClickListener(new View.OnClickListener()
                             {
                                 @Override public void onClick(View v) {
-                                    ImageViewPopUpHelper.enablePopUpOnClick(getActivity(), ui);
+                                    //ImageViewPopUpHelper.enablePopUpOnClick(getActivity(), ui);
+                                    Intent i = new Intent(getContext(), com.androidbelieve.drawerwithswipetabs.ImageView.class);
+                                    try {
+                                        i.putExtra("imageurl",url+jo.getString("user_img"));
+                                        startActivity(i);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
                                 }
                             });
                             li.setOnClickListener(new View.OnClickListener()
                             {
                                 @Override public void onClick(View v) {
-                                    ImageViewPopUpHelper.enablePopUpOnClick(getActivity(), li);
+                                    //ImageViewPopUpHelper.enablePopUpOnClick(getActivity(), li);
+                                    Intent i = new Intent(getContext(),com.androidbelieve.drawerwithswipetabs.ImageView.class);
+                                    try {
+                                        i.putExtra("imageurl",url+jo.getString("license"));
+                                        startActivity(i);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
                                 }
                             });
 

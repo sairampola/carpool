@@ -7,6 +7,6 @@ import com.google.android.gms.common.api.GoogleApiClient;
  */
 
 public class AGlobal {
-    static String url ="http://192.168.1.8:3000/";
+    static String url ="http://10.10.64.143:3000/";
 
 }
