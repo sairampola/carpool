@@ -158,4 +158,10 @@ public class LiftFragment extends Fragment implements
             mGoogleApiClient.disconnect();
         }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mGoogleApiClient.connect();
+    }
 }

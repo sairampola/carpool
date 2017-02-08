@@ -17,8 +17,12 @@
         android:layout_marginTop="28dp"
         android:id="@+id/saddrtv" />
 
+
     <AutoCompleteTextView
 
+
+
+        android:scrollHorizontally="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/saddret"
@@ -28,6 +32,7 @@
         android:layout_below="@+id/saddrtv"
         android:layout_alignLeft="@+id/saddrtv"
         android:layout_alignStart="@+id/saddrtv" />
+
 
     <TextView
         android:text="Destination Address :"
@@ -41,6 +46,8 @@
 
     <AutoCompleteTextView
 
+
+        android:scrollHorizontally="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/daddret"

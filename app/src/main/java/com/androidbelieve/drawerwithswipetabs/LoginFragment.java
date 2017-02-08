@@ -1,5 +1,6 @@
 package com.androidbelieve.drawerwithswipetabs;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,6 +38,8 @@ public class LoginFragment extends Fragment {
 
     EditText em,pw;
     Button sub,sign;
+    Context c;
+
 
     @Nullable
     @Override
@@ -46,6 +50,7 @@ public class LoginFragment extends Fragment {
     @Override
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        c = getContext();
         em=(EditText)view.findViewById(R.id.email);
         pw=(EditText)view.findViewById(R.id.password);
         sub=(Button)view.findViewById(R.id.submit);
@@ -70,6 +75,7 @@ public class LoginFragment extends Fragment {
                 emaillol = em.getText().toString();
                 passwordlol = pw.getText().toString();
                 String url = AGlobal.url+"login";
+                final String url2 = AGlobal.url;
                 ////////////////////////////
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                         new Response.Listener<String>() {
@@ -83,11 +89,70 @@ public class LoginFragment extends Fragment {
                                     int status = jo.getInt("error");
                                     if(status ==0)
                                     {
+                                        /////////////////////////
+                                        //////////////////////////////////////////
+                                        StringRequest stringRequest = new StringRequest(Request.Method.POST, url2+"profile",
+                                                new Response.Listener<String>() {
+                                                    @Override
+                                                    public void onResponse(String response) {
+
+                                                        // Result handling
+                                                        //Toast.makeText(getContext(),response,Toast.LENGTH_SHORT).show();
+                                                        try {
+                                                            final JSONObject jo= new JSONObject(response);
+                                                            SharedPreferences.Editor editor = c.getSharedPreferences("carpool", MODE_PRIVATE).edit();
+                                                            editor.putString("email", emaillol);
+                                                            editor.putInt("status",1);
+                                                            editor.putString("name",jo.getString("name"));
+                                                            editor.putString("user_img",jo.getString("user_img"));
+                                                            editor.commit();
+
+
+
+
+
+                                                        } catch (JSONException e) {
+                                                            e.printStackTrace();
+                                                        }
+
+                                                    }
+                                                }, new Response.ErrorListener() {
+                                            @Override
+                                            public void onErrorResponse(VolleyError error) {
+
+                                                // Error handling
+
+                                                //System.out.println("Something went wrong!");
+                                                error.printStackTrace();
+
+                                            }
+
+                                        }){
+                                            @Override
+                                            protected Map<String, String> getParams() {
+                                                final Map<String, String> params = new HashMap<String, String>();
+                                                //params.put("name", "Androidhive");
+
+                                                params.put("email", emaillol);
+
+                                                return params;
+                                            }
+
+                                        };
+
+// Add the request to the queue
+                                        Volley.newRequestQueue(getContext()).add(stringRequest);
+
+
+
+
+
+
+
+                                        //////////////////////////////////////////
+                                        /////////////////////////
                                         ((MainActivity)getActivity()).setlolbar("CarPool");
-                                        SharedPreferences.Editor editor = getContext().getSharedPreferences("carpool", MODE_PRIVATE).edit();
-                                        editor.putString("email", emaillol);
-                                        editor.putInt("status",1);
-                                        editor.commit();
+
                                         Intent intent = getActivity().getIntent();
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK
                                                 | Intent.FLAG_ACTIVITY_NO_ANIMATION);

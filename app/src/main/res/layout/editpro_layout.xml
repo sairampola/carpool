@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+            <TextView
+                android:text="Name"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="18dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="23dp"
+                android:id="@+id/textView4" />
+
+            <EditText
+                android:paddingRight="10dp"
+                android:layout_marginLeft="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:text="Name"
+                android:ems="10"
+                android:id="@+id/nameedit"
+                android:layout_below="@+id/textView4"
+                android:layout_alignLeft="@+id/textView4"
+                android:layout_alignStart="@+id/textView4" />
+
+            <TextView
+                android:paddingRight="10dp"
+                android:layout_marginLeft="12dp"
+                android:text="Phone"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/nameedit"
+                android:layout_alignLeft="@+id/nameedit"
+                android:layout_alignStart="@+id/nameedit"
+                android:id="@+id/textView5" />
+
+            <EditText
+                android:paddingRight="10dp"
+                android:layout_marginLeft="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                android:text="Phone"
+                android:ems="10"
+                android:id="@+id/phoneedit"
+                android:layout_below="@+id/textView5"
+                android:layout_alignLeft="@+id/textView5"
+                android:layout_alignStart="@+id/textView5" />
+
+            <TextView
+                android:paddingRight="10dp"
+                android:layout_marginLeft="12dp"
+                android:text="Email"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/phoneedit"
+                android:layout_alignLeft="@+id/phoneedit"
+                android:layout_alignStart="@+id/phoneedit"
+                android:id="@+id/textView6" />
+
+            <TextView
+                android:paddingRight="10dp"
+                android:layout_marginLeft="12dp"
+                android:text="email id"
+                android:textSize="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView6"
+                android:layout_alignLeft="@+id/textView6"
+                android:layout_alignStart="@+id/textView6"
+                android:id="@+id/emailnoedit" />
+
+            <TextView
+                android:paddingRight="10dp"
+                android:layout_marginLeft="12dp"
+                android:text="Gender"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/emailnoedit"
+                android:layout_alignLeft="@+id/emailnoedit"
+                android:layout_alignStart="@+id/emailnoedit"
+                android:id="@+id/textView8" />
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView8"
+                android:layout_alignLeft="@+id/textView8"
+                android:layout_alignStart="@+id/textView8"
+                android:layout_marginTop="13dp"
+                android:id="@+id/editradiogrp">
+
+                <RadioButton
+                    android:text="Male"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textView8"
+                    android:layout_toRightOf="@+id/editradiogrp"
+                    android:layout_toEndOf="@+id/editradiogrp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:id="@+id/male" />
+
+                <RadioButton
+                    android:text="Female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textView8"
+                    android:layout_toRightOf="@+id/editradiogrp"
+                    android:layout_toEndOf="@+id/editradiogrp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:id="@+id/female" />
+
+            </RadioGroup>
+
+            <TextView
+                android:text="Password"
+                android:textSize="20sp"
+                android:paddingRight="10dp"
+                android:layout_marginLeft="12dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView9" />
+
+            <EditText
+                android:textSize="20sp"
+                android:paddingRight="10dp"
+                android:layout_marginLeft="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:ems="10"
+                android:id="@+id/pwedit" />
+
+            <TextView
+                android:text="Home Address"
+                android:textSize="20sp"
+                android:paddingRight="10dp"
+                android:layout_marginLeft="12dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView10" />
+
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

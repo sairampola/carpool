@@ -10,6 +10,8 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,8 +30,13 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -132,6 +139,7 @@ public class RegisterFragment extends Fragment implements
             @Override
             public void onClick(View v) {
 
+                Toast.makeText(getContext(),"Registering .....",Toast.LENGTH_SHORT).show();
                 AsyncHttpClient client = new AsyncHttpClient();
                 RequestParams rp = new RequestParams();
                 rp.put("name",name.getText().toString());
@@ -162,12 +170,26 @@ public class RegisterFragment extends Fragment implements
                 client.post(AGlobal.url + "register", rp,new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                        Toast.makeText(getContext(),"haaaa",Toast.LENGTH_SHORT).show();
+
+                        String error=null;
+                        try {
+                            JSONObject loljson = new JSONObject(new String(responseBody, "UTF-8"));
+                            error = loljson.getString("error");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
+                        Toast.makeText(getContext(),error,Toast.LENGTH_SHORT).show();
+
+                        FragmentManager fm=getFragmentManager();
+                        FragmentTransaction ft=fm.beginTransaction();
+                        ft.replace(R.id.containerView,new LoginFragment()).commit();
                     }
 
                     @Override
                     public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                        Toast.makeText(getContext(),"hmmmm",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),"Please Try Again ",Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -315,5 +337,10 @@ public class RegisterFragment extends Fragment implements
             mGoogleApiClient.stopAutoManage(getActivity());
             mGoogleApiClient.disconnect();
         }
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        mGoogleApiClient.connect();
     }
 }

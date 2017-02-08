@@ -1,5 +1,6 @@
 package com.androidbelieve.drawerwithswipetabs;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,10 +16,22 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.places.Places;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static android.content.Context.MODE_PRIVATE;
 import static com.androidbelieve.drawerwithswipetabs.MainActivity.BOUNDS_INDIA;
 import static com.androidbelieve.drawerwithswipetabs.MainActivity.LOG_TAG;
 
@@ -98,6 +111,77 @@ public class PickupFragment extends Fragment implements GoogleApiClient.OnConnec
 
 
         ////////////----------------places Api///////////
+        final String url = AGlobal.url;
+        picksub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //////////////////////////////////////////
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, url+"pickup",
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+
+                                // Result handling
+                                //Toast.makeText(getContext(),response,Toast.LENGTH_SHORT).show();
+                                try {
+                                    final JSONObject jo= new JSONObject(response);
+
+                                    System.out.println("aaaaaaa went wrong!");
+
+
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                        // Error handling
+
+                        //System.out.println("Something went wrong!");
+                        error.printStackTrace();
+
+                    }
+
+                }){
+                    @Override
+                    protected Map<String, String> getParams() {
+                        final Map<String, String> params = new HashMap<String, String>();
+                        //params.put("name", "Androidhive");
+                        final SharedPreferences prefs = getContext().getSharedPreferences("carpool", MODE_PRIVATE);
+                        final String emaill = prefs.getString("email","lol");
+                        final String namee=prefs.getString("name","lol");
+                        final String userimg=prefs.getString("user_img","lol");
+
+
+                        params.put("email",emaill );
+                        params.put("name",namee );
+                        params.put("user_img",userimg );
+                        params.put("source_address",addrS );
+                        params.put("destination_address",addrD );
+                        Long lo = System.currentTimeMillis()/1000;
+                        params.put("timestamp",lo.toString());
+                        params.put("gender",Genderpre );
+                        params.put("seats",seatno.getText().toString() );
+
+
+                        return params;
+                    }
+
+                };
+
+// Add the request to the queue
+                Volley.newRequestQueue(getContext()).add(stringRequest);
+
+
+
+
+                //////////////////////////////////////////
+            }
+        });
 
     }
     private AdapterView.OnItemClickListener mAutocompleteClickListener
@@ -164,5 +248,10 @@ public class PickupFragment extends Fragment implements GoogleApiClient.OnConnec
             mGoogleApiClient.stopAutoManage(getActivity());
             mGoogleApiClient.disconnect();
         }
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        mGoogleApiClient.connect();
     }
 }
