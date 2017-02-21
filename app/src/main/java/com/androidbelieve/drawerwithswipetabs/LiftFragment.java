@@ -1,9 +1,12 @@
 package com.androidbelieve.drawerwithswipetabs;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +22,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.places.Places;
 
+import static android.content.Context.MODE_PRIVATE;
 import static com.androidbelieve.drawerwithswipetabs.MainActivity.BOUNDS_INDIA;
 import static com.androidbelieve.drawerwithswipetabs.MainActivity.LOG_TAG;
 
@@ -68,6 +72,22 @@ public class LiftFragment extends Fragment implements
                 }
                 else
                     Genderpre="none";
+            }
+        });
+        picksub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AGlobal.gen=Genderpre;
+                final SharedPreferences prefs = getContext().getSharedPreferences("carpool", MODE_PRIVATE);
+                AGlobal.nos= Integer.parseInt(seatno.getText().toString());
+                AGlobal.sa=addrS;
+                AGlobal.da=addrD;
+                AGlobal.em = prefs.getString("email",null);
+                AGlobal.ui= prefs.getString("user_img",null);
+                AGlobal.na=prefs.getString("name",null);
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.containerView, new LiftSearchFragment()).commit();
             }
         });
         /////////////--------gender preference////////////

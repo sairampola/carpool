@@ -197,8 +197,9 @@ public class ProfileFragment extends Fragment {
                 final Map<String, String> params = new HashMap<String, String>();
                 //params.put("name", "Androidhive");
 
-                params.put("email", emaill);
+                //params.put("email", emaill);
 
+                params.put("email", AGlobal.em);
                 return params;
             }
 

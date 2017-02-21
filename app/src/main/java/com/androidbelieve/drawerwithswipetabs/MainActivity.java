@@ -128,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
                  }
 
                 if (menuItem.getItemId() == R.id.nav_item_profile&&status==1) {
+                    AGlobal.em=prefs.getString("email",null);
                     FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
                     xfragmentTransaction.replace(R.id.containerView,new ProfileFragment()).commit();
                     toolbar.setTitle("Profile");

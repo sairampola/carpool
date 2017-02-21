@@ -38,4 +38,5 @@ dependencies {
     compile 'com.android.support:multidex:1.0.1'
     compile 'com.github.oxoooo:touch-image-view:1.0.1'
 
+
 }

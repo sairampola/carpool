@@ -135,6 +135,9 @@ public class EditProFragment extends Fragment implements GoogleApiClient.OnConne
                             addrC=jo.getString("company_address");
                             uploadL=jo.getString("license");
 
+                            SharedPreferences.Editor editor = getContext().getSharedPreferences("carpool", MODE_PRIVATE).edit();
+                            editor.putString("email", jo.getString("email"));
+                            editor.commit();
 
                             if(Gender.equals("male"))
                             {

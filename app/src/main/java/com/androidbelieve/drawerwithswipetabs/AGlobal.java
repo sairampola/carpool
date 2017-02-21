@@ -1,12 +1,13 @@
 package com.androidbelieve.drawerwithswipetabs;
 
-import com.google.android.gms.common.api.GoogleApiClient;
-
 /**
  * Created by pain on 31/1/17.
  */
 
 public class AGlobal {
-    static String url ="http://10.10.64.143:3000/";
+    static String url ="http://10.10.64.150:3000/";
+    static  int nos=0;
+    static String gen ="male";
+    static String na="",sa="",da="",em="",ui="";
 
 }
