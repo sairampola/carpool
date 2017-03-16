@@ -61,7 +61,7 @@ public class LiftSearchFragment extends Fragment {
 
 
             listView = (ListView) view.findViewById(R.id.list);
-            adapter = new CustomListAdapter(getActivity(), movieList);
+            adapter = new CustomListAdapter(getActivity(), movieList,getContext(),getFragmentManager());
             listView.setAdapter(adapter);
 
             pDialog = new ProgressDialog(getActivity());
@@ -97,6 +97,7 @@ public class LiftSearchFragment extends Fragment {
                                     movie.setThumbnailUrl(obj.getString("user_img"));
                                     movie.setRating(obj.getString("source_address"));
                                     movie.setGenre(obj.getString("destination_address"));
+                                    movie.setEmailid(obj.getString("email"));
                                     //movie.setYear(obj.getInt("seats"));
 
                                     // Genre is json array

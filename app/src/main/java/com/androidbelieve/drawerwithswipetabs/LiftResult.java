@@ -9,7 +9,7 @@ public class LiftResult {
 
     private String name, thumbnailUrl;
     //private int year;
-    private String saddr,daddr;
+    private String saddr,daddr,emailid;
 
    // private ArrayList<String> genre;
 
@@ -23,6 +23,7 @@ public class LiftResult {
         //this.year = year;
         this.saddr = rating;
         this.daddr = genre;
+        //this.emailid=emid;
     }
 
     public String getTitle() {
@@ -59,6 +60,13 @@ public class LiftResult {
         this.daddr = genre;
     }
 
+    public String getEmailid() {
+        return emailid;
+    }
+
+    public void setEmailid(String emailid) {
+        this.emailid = emailid;
+    }
 }
 
 
