@@ -1,6 +1,7 @@
 package com.androidbelieve.drawerwithswipetabs;
 
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -25,6 +26,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by Ratan on 7/29/2015.
@@ -57,6 +60,7 @@ public class LiftSearchFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        final SharedPreferences prefs = getContext().getSharedPreferences("carpool", MODE_PRIVATE);
 
 
 
@@ -138,7 +142,7 @@ public class LiftSearchFragment extends Fragment {
                     params.put("seats", String.valueOf(AGlobal.nos));
                     params.put("name", AGlobal.na);
                     params.put("user_img", AGlobal.ui);
-                    params.put("email", AGlobal.em);
+                    params.put("email", prefs.getString("email",null));
                     params.put("source_address", AGlobal.sa);
                     params.put("destination_address", AGlobal.da);
                     Long lo = System.currentTimeMillis()/1000;

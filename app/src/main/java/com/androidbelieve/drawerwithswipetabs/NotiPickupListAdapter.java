@@ -7,6 +7,7 @@ package com.androidbelieve.drawerwithswipetabs;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -17,36 +18,26 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static android.content.Context.MODE_PRIVATE;
 
 
-public class CustomListAdapter extends BaseAdapter {
+public class NotiPickupListAdapter extends BaseAdapter {
 
     private Activity activity;
     private LayoutInflater inflater;
     private Context con;
     private FragmentManager fml;
     private String emll;
-    private List<LiftResult> movieItems;
-    LiftResult m;
+    private List<NotiPickupResults> movieItems;
+    NotiPickupResults m;
     ImageLoader imageLoader = AppController.getInstance().getImageLoader();
 
-    public CustomListAdapter(Activity activity, List<LiftResult> movieItems,Context con,FragmentManager fm) {
+    public NotiPickupListAdapter(Activity activity, List<NotiPickupResults> movieItems,Context con,FragmentManager fm) {
         this.activity = activity;
         this.movieItems = movieItems;
         this.con = con;
@@ -75,20 +66,22 @@ public class CustomListAdapter extends BaseAdapter {
             inflater = (LayoutInflater) activity
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if (convertView == null)
-            convertView = inflater.inflate(R.layout.list_row, null);
+            convertView = inflater.inflate(R.layout.noti_pickup_row_layout, null);
 
         if (imageLoader == null)
             imageLoader = AppController.getInstance().getImageLoader();
         NetworkImageView thumbNail = (NetworkImageView) convertView
                 .findViewById(R.id.thumbnail);
         TextView title = (TextView) convertView.findViewById(R.id.name2);
-        TextView rating = (TextView) convertView.findViewById(R.id.saddr);
-        TextView genre = (TextView) convertView.findViewById(R.id.daddr);
-        Button req = (Button)convertView.findViewById(R.id.reqlist);
-         m = movieItems.get(position);
+        Button acc = (Button)convertView.findViewById(R.id.Accept);
+        Button rej = (Button)convertView.findViewById(R.id.Reject);
+        m = movieItems.get(position);
         final String url2 = AGlobal.url;
         final SharedPreferences prefs = con.getSharedPreferences("carpool", MODE_PRIVATE);
-        req.setOnClickListener(new View.OnClickListener() {
+
+
+
+       /*rej.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 /////////////////////////////////////////////////////////////
@@ -149,14 +142,14 @@ public class CustomListAdapter extends BaseAdapter {
 
 
             }
-        });
+        });*/
 
 
         //TextView year = (TextView) convertView.findViewById(R.id.releaseYear);
 
         // getting movie data for the row
 
-        emll = m.getEmailid();
+        emll = m.getAemailid();
 
         // thumbnail image
         thumbNail.setImageUrl(AGlobal.url+m.getThumbnailUrl(), imageLoader);
@@ -176,16 +169,17 @@ public class CustomListAdapter extends BaseAdapter {
 
         genreStr = genreStr.length() > 0 ? genreStr.substring(0,
                 genreStr.length() - 2) : genreStr;*/
-        rating.setText("Source Address: " + String.valueOf(m.getRating()));
-        genre.setText("Destination Address: " + String.valueOf(m.getGenre()));
         title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AGlobal.em = emll;
+
                 Toast.makeText(con,emll,Toast.LENGTH_SHORT).show();
-                FragmentManager fm = fml;
-                FragmentTransaction ft=fm.beginTransaction();
+                //FragmentManager fm = fml;
+                ///FragmentTransaction ft=fm.beginTransaction();
+                FragmentTransaction ft = ((FragmentActivity)con).getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.containerView,new LiftProfileViewFragment()).commit();
+
             }
         });
 
