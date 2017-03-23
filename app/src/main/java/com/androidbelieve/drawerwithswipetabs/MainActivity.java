@@ -1,6 +1,7 @@
 package com.androidbelieve.drawerwithswipetabs;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -20,10 +21,20 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -42,10 +53,63 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
         final SharedPreferences prefs = getSharedPreferences("carpool", MODE_PRIVATE);
          final int status = prefs.getInt("status",0);
 
 
+        if(status==1){
+            FirebaseMessaging.getInstance().subscribeToTopic("carpool");
+            final String token= FirebaseInstanceId.getInstance().getToken();
+            final String emai = prefs.getString("email",null);
+            final String url2 = AGlobal.url;
+            final Context con = getApplicationContext();
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, url2+"registertoken",
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+
+                            // Result handling
+                            //Toast.makeText(getContext(),response,Toast.LENGTH_SHORT).show();
+                            try {
+                                //Toast.makeText(con,"Successfully requested!!",Toast.LENGTH_SHORT).show();
+
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                    // Error handling
+
+                    //System.out.println("Something went wrong!");
+                    error.printStackTrace();
+
+                }
+
+            }){
+                @Override
+                protected Map<String, String> getParams() {
+                    final Map<String, String> params = new HashMap<String, String>();
+                    //params.put("name", "Androidhive");
+
+                    params.put("email", emai);
+                    params.put("token", token);
+
+                    return params;
+                }
+
+            };
+
+// Add the request to the queue
+            Volley.newRequestQueue(con).add(stringRequest);
+        }
 
 
 
