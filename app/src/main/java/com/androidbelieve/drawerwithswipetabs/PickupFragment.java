@@ -126,6 +126,7 @@ public class PickupFragment extends Fragment implements GoogleApiClient.OnConnec
                                 try {
                                     final JSONObject jo= new JSONObject(response);
 
+                                    Toast.makeText(getContext(), "Your request has been posted successfully", Toast.LENGTH_SHORT).show();
                                     System.out.println("aaaaaaa went wrong!");
 
 
@@ -166,6 +167,7 @@ public class PickupFragment extends Fragment implements GoogleApiClient.OnConnec
                         params.put("timestamp",lo.toString());
                         params.put("gender",Genderpre );
                         params.put("seats",seatno.getText().toString() );
+
 
 
                         return params;

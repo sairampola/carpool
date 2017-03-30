@@ -23,6 +23,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -123,6 +124,7 @@ public class LiftSearchFragment extends Fragment {
 
                             // notifying list adapter about data changes
                             // so that it renders the list view with updated data
+                            Collections.reverse(movieList);
                             adapter.notifyDataSetChanged();
                         }
                     }, new Response.ErrorListener() {
