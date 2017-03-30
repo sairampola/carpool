@@ -117,8 +117,10 @@ public class MainActivity extends AppCompatActivity {
 
         /////////////runtime permission////////////
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
-            //ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},2);
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_NETWORK_STATE,Manifest.permission.RECEIVE_SMS,Manifest.permission.SEND_SMS},1);
+            //ActivityCompat.requestPermissions(MainActivity.this, new String[]{},1);
+            //ActivityCompat.requestPermissions(MainActivity.this, new String[]{},1);
+            //ActivityCompat.requestPermissions(MainActivity.this, new String[]{},1);
         }
 
         /////////////------runtime permission//////
@@ -292,24 +294,13 @@ public class MainActivity extends AppCompatActivity {
 
                 } else {
 
-                    Toast.makeText(MainActivity.this, "Permission denied to read your External storage", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Permission denied ", Toast.LENGTH_SHORT).show();
                 }
+
                 return;
             }
 
-            case 2: {
 
-
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-
-                } else {
-
-                    Toast.makeText(MainActivity.this, "Permission denied to Access your Location", Toast.LENGTH_SHORT).show();
-                }
-                return;
-            }
 
 
         }
