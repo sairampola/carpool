@@ -173,14 +173,14 @@ public class MainActivity extends AppCompatActivity {
 
                  if (menuItem.getItemId() == R.id.nav_item_home&&status==1) {
                      FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                     fragmentTransaction.replace(R.id.containerView,new HomeFragment()).commit();
+                     fragmentTransaction.replace(R.id.containerView,new HomeFragment()).addToBackStack(null).commit();
                      toolbar.setTitle("CarPool");
                  }
 
 
                  if (menuItem.getItemId() == R.id.nav_item_logout &&status ==0) {
                      FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                     fragmentTransaction.replace(R.id.containerView,new LoginFragment()).commit();
+                     fragmentTransaction.replace(R.id.containerView,new LoginFragment()).addToBackStack(null).commit();
                         toolbar.setTitle("CarPool");
                  }
                  if (menuItem.getItemId() == R.id.nav_item_logout &&status ==1) {
@@ -196,39 +196,39 @@ public class MainActivity extends AppCompatActivity {
                 if (menuItem.getItemId() == R.id.nav_item_profile&&status==1) {
                     AGlobal.em=prefs.getString("email",null);
                     FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
-                    xfragmentTransaction.replace(R.id.containerView,new ProfileFragment()).commit();
+                    xfragmentTransaction.replace(R.id.containerView,new ProfileFragment()).addToBackStack(null).commit();
                     toolbar.setTitle("Profile");
                 }
                  if (menuItem.getItemId() == R.id.nav_item_noti&&status==1) {
                      FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
-                     xfragmentTransaction.replace(R.id.containerView,new NotificationsFragment()).commit();
+                     xfragmentTransaction.replace(R.id.containerView,new NotificationsFragment()).addToBackStack(null).commit();
                      toolbar.setTitle("Notifications");
                  }
                  if (menuItem.getItemId() == R.id.nav_item_yori&&status==1) {
                      FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
-                     xfragmentTransaction.replace(R.id.containerView,new YourRidesFragment()).commit();
+                     xfragmentTransaction.replace(R.id.containerView,new YourRidesFragment()).addToBackStack(null).commit();
                      toolbar.setTitle("Your Rides");
                  }
                  if (menuItem.getItemId() == R.id.nav_item_cogr&&status==1) {
                      FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
-                     xfragmentTransaction.replace(R.id.containerView,new CompanyGrpFragment()).commit();
+                     xfragmentTransaction.replace(R.id.containerView,new CompanyGrpFragment()).addToBackStack(null).commit();
                      toolbar.setTitle("Company Group");
                  }
                  if (menuItem.getItemId() == R.id.nav_item_selo&&status==1) {
                      FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
-                     xfragmentTransaction.replace(R.id.containerView,new SendLocationFragment()).commit();
+                     xfragmentTransaction.replace(R.id.containerView,new SendLocationFragment()).addToBackStack(null).commit();
                      toolbar.setTitle("Send Location");
                  }
                  if (menuItem.getItemId() == R.id.nav_item_raca&&status==1 ){
                      FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
-                     xfragmentTransaction.replace(R.id.containerView,new RateCardFragment()).commit();
+                     xfragmentTransaction.replace(R.id.containerView,new RateCardFragment()).addToBackStack(null).commit();
                      toolbar.setTitle("Rate Card");
                  }
 
                  if(status==0 && menuItem.getItemId() != R.id.nav_item_logout){
                      Toast.makeText(getApplicationContext(),"Please Login first!",Toast.LENGTH_SHORT).show();
                      FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                     fragmentTransaction.replace(R.id.containerView,new LoginFragment()).commit();
+                     fragmentTransaction.replace(R.id.containerView,new LoginFragment()).addToBackStack(null).commit();
                      toolbar.setTitle("CarPool");
                  }
 
@@ -304,5 +304,15 @@ public class MainActivity extends AppCompatActivity {
 
 
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if ( getFragmentManager().getBackStackEntryCount() > 0)
+        {
+            getFragmentManager().popBackStack();
+            return;
+        }
+        super.onBackPressed();
     }
 }

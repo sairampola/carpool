@@ -60,6 +60,7 @@ public class PickupFragment extends Fragment implements GoogleApiClient.OnConnec
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ((MainActivity)getActivity()).setlolbar("CarPool");
         saddr=(AutoCompleteTextView)view.findViewById(R.id.saddret);
         daddr=(AutoCompleteTextView)view.findViewById(R.id.daddret);
         genp=(RadioGroup)view.findViewById(R.id.radioGroup);

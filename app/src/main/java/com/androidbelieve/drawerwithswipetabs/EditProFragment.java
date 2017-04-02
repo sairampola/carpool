@@ -314,7 +314,7 @@ public class EditProFragment extends Fragment implements GoogleApiClient.OnConne
 
                         FragmentManager fm = getFragmentManager();
                         FragmentTransaction ft = fm.beginTransaction();
-                        ft.replace(R.id.containerView, new ProfileFragment()).commit();
+                        ft.replace(R.id.containerView, new ProfileFragment()).addToBackStack(null).commit();
                     }
 
                     @Override

@@ -185,7 +185,7 @@ public class CustomListAdapter extends BaseAdapter {
                 Toast.makeText(con,emll,Toast.LENGTH_SHORT).show();
                 FragmentManager fm = fml;
                 FragmentTransaction ft=fm.beginTransaction();
-                ft.replace(R.id.containerView,new LiftProfileViewFragment()).commit();
+                ft.replace(R.id.containerView,new LiftProfileViewFragment()).addToBackStack(null).commit();
             }
         });
 

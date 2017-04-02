@@ -64,6 +64,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ((MainActivity)getActivity()).setlolbar("Profile");
         ui=(ImageView)view.findViewById(R.id.userimg);
         li=(ImageView)view.findViewById(R.id.licenseimg);
         ep=(Button)view.findViewById(R.id.editprofile);

@@ -5,7 +5,7 @@ package com.androidbelieve.drawerwithswipetabs;
  */
 
 public class AGlobal {
-    static String url ="http://192.168.0.7:3000/";
+    static String url ="http://192.168.1.10:3000/";
     static  int nos=0;
     static String gen ="male";
     static String na="",sa="",da="",em="",ui="";

@@ -178,7 +178,7 @@ public class NotiPickupListAdapter extends BaseAdapter {
                 //FragmentManager fm = fml;
                 ///FragmentTransaction ft=fm.beginTransaction();
                 FragmentTransaction ft = ((FragmentActivity)con).getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.containerView,new LiftProfileViewFragment()).commit();
+                ft.replace(R.id.containerView,new LiftProfileViewFragment()).addToBackStack(null).commit();
 
             }
         });

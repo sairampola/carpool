@@ -34,6 +34,7 @@ public class SendLocationFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ((MainActivity)getActivity()).setlolbar("Send Location");
         et= (EditText) view.findViewById(R.id.editText);
         bt= (Button) view.findViewById(R.id.button2);
         sw = (Switch) view.findViewById(R.id.switch1);

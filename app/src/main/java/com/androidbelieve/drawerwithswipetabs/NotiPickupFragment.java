@@ -60,7 +60,7 @@ public class NotiPickupFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        ((MainActivity)getActivity()).setlolbar("Notifications");
 
 
         final SharedPreferences prefs = getContext().getSharedPreferences("carpool", MODE_PRIVATE);
