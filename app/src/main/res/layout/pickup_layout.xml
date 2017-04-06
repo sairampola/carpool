@@ -4,6 +4,16 @@
     android:layout_height="match_parent">
 
 
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <RelativeLayout
+            android:id="@+id/form_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+             >
+
     <TextView
         android:text="Source Address :"
         android:textSize="20sp"
@@ -140,6 +150,7 @@
         android:layout_below="@+id/seatset"
         android:layout_toRightOf="@+id/radioGroup"
         android:layout_toEndOf="@+id/radioGroup" />
-
+        </RelativeLayout>
+    </ScrollView>
 
 </RelativeLayout>

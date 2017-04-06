@@ -39,6 +39,7 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     DrawerLayout mDrawerLayout;
+    boolean doubleBackToExitPressedOnce = false;
     NavigationView mNavigationView;
     FragmentManager mFragmentManager;
     FragmentTransaction mFragmentTransaction;
