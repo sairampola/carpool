@@ -20,7 +20,7 @@ import static android.content.Context.MODE_PRIVATE;
  * Created by pain on 6/4/17.
  */
 
-public class NotiLiftListAdapter extends BaseAdapter {
+public class YourRideListAdapter extends BaseAdapter {
     private Activity activity;
     private LayoutInflater inflater;
     private Context con;
@@ -30,7 +30,7 @@ public class NotiLiftListAdapter extends BaseAdapter {
     NotiPickupResults m;
     ImageLoader imageLoader = AppController.getInstance().getImageLoader();
 
-    public NotiLiftListAdapter(Activity activity, List<NotiPickupResults> movieItems,Context con,FragmentManager fm) {
+    public YourRideListAdapter(Activity activity, List<NotiPickupResults> movieItems,Context con,FragmentManager fm) {
         this.activity = activity;
         this.movieItems = movieItems;
         this.con = con;
@@ -59,12 +59,12 @@ public class NotiLiftListAdapter extends BaseAdapter {
             inflater = (LayoutInflater) activity
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if (convertView == null)
-            convertView = inflater.inflate(R.layout.noti_lift_row_layout, null);
+            convertView = inflater.inflate(R.layout.your_rides_list_row, null);
 
         if (imageLoader == null)
             imageLoader = AppController.getInstance().getImageLoader();
-       // NetworkImageView thumbNail = (NetworkImageView) convertView
-                //.findViewById(R.id.thumbnail);
+        // NetworkImageView thumbNail = (NetworkImageView) convertView
+        //.findViewById(R.id.thumbnail);
         TextView title = (TextView) convertView.findViewById(R.id.name2);
         //final Button acc = (Button)convertView.findViewById(R.id.Accept);
         //final Button rej = (Button)convertView.findViewById(R.id.Reject);
@@ -212,15 +212,11 @@ public class NotiLiftListAdapter extends BaseAdapter {
         emll = m.getAemailid();
 
         // thumbnail image
-    //    thumbNail.setImageUrl(AGlobal.url+m.getThumbnailUrl(), imageLoader);
+        //    thumbNail.setImageUrl(AGlobal.url+m.getThumbnailUrl(), imageLoader);
 
         // title
-        String d="";
-        if(Integer.parseInt(m.getStatus())==0)
-            d="accepted";
-        else
-            d = "rejected";
-        title.setText(m.getBemailid() +" has "+d+" your request");
+
+        title.setText(m.getBemailid() );
 
         // rating
         //rating.setText("Source Address: " + String.valueOf(m.getRating()));
