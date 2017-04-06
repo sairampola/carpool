@@ -18,10 +18,17 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -73,19 +80,19 @@ public class NotiPickupListAdapter extends BaseAdapter {
         NetworkImageView thumbNail = (NetworkImageView) convertView
                 .findViewById(R.id.thumbnail);
         TextView title = (TextView) convertView.findViewById(R.id.name2);
-        Button acc = (Button)convertView.findViewById(R.id.Accept);
-        Button rej = (Button)convertView.findViewById(R.id.Reject);
+        final Button acc = (Button)convertView.findViewById(R.id.Accept);
+        final Button rej = (Button)convertView.findViewById(R.id.Reject);
         m = movieItems.get(position);
         final String url2 = AGlobal.url;
         final SharedPreferences prefs = con.getSharedPreferences("carpool", MODE_PRIVATE);
 
 
 
-       /*rej.setOnClickListener(new View.OnClickListener() {
+       rej.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 /////////////////////////////////////////////////////////////
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, url2+"notipickuprequest",
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, url2+"notiacceptreject",
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
@@ -93,8 +100,10 @@ public class NotiPickupListAdapter extends BaseAdapter {
                                 // Result handling
                                 //Toast.makeText(getContext(),response,Toast.LENGTH_SHORT).show();
                                 try {
-                                    Toast.makeText(con,"Successfully requested!!",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(con,"Rejected!!",Toast.LENGTH_SHORT).show();
 
+                                    rej.setVisibility(View.GONE);
+                                    acc.setVisibility(View.VISIBLE);
 
                                 } catch (Exception e) {
                                     e.printStackTrace();
@@ -118,10 +127,10 @@ public class NotiPickupListAdapter extends BaseAdapter {
                         final Map<String, String> params = new HashMap<String, String>();
                         //params.put("name", "Androidhive");
 
-                        params.put("Aname", prefs.getString("name","lol"));
-                        params.put("Aemail", prefs.getString("email","lol"));
-                        params.put("Bemail", m.getEmailid());
-                        params.put("Apropic", prefs.getString("user_img","lol"));
+                        params.put("Aname", m.getTitle());
+                        params.put("Aemail", m.getAemailid());
+                        params.put("Bemail", m.getBemailid());
+                        params.put("Status", "1");
                         return params;
                     }
 
@@ -142,8 +151,73 @@ public class NotiPickupListAdapter extends BaseAdapter {
 
 
             }
-        });*/
+        });
 
+
+        acc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+/////////////////////////////////////////////////////////////
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, url2+"notiacceptreject",
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+
+                                // Result handling
+                                //Toast.makeText(getContext(),response,Toast.LENGTH_SHORT).show();
+                                try {
+                                    Toast.makeText(con,"Accepted!!",Toast.LENGTH_SHORT).show();
+
+                                    acc.setVisibility(View.GONE);
+                                    rej.setVisibility(View.VISIBLE);
+
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                        // Error handling
+
+                        //System.out.println("Something went wrong!");
+                        error.printStackTrace();
+
+                    }
+
+                }){
+                    @Override
+                    protected Map<String, String> getParams() {
+                        final Map<String, String> params = new HashMap<String, String>();
+                        //params.put("name", "Androidhive");
+
+                        params.put("Aname", m.getTitle());
+                        params.put("Aemail", m.getAemailid());
+                        params.put("Bemail", m.getBemailid());
+                        params.put("Status", "0");
+                        return params;
+                    }
+
+                };
+
+// Add the request to the queue
+                Volley.newRequestQueue(con).add(stringRequest);
+
+
+
+
+
+
+
+                //////////////////////////////////////////
+/////////////////////////////////////////////////////////////
+
+
+
+            }
+        });
 
         //TextView year = (TextView) convertView.findViewById(R.id.releaseYear);
 
