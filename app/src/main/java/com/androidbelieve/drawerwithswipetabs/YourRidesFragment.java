@@ -163,4 +163,10 @@ public class YourRidesFragment extends Fragment {
             pDialog = null;
         }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        movieList.clear();
+    }
 }

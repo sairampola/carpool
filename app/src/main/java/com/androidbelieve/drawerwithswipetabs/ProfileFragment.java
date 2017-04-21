@@ -75,6 +75,14 @@ public class ProfileFragment extends Fragment {
         gen=(TextView)view.findViewById(R.id.gender);
         ha=(TextView)view.findViewById(R.id.homeadrr);
         ca=(TextView)view.findViewById(R.id.compaddr);
+        if(AGlobal.chdp==1){
+            ep.setVisibility(View.INVISIBLE);
+            ci.setVisibility(View.INVISIBLE);
+            AGlobal.chdp=0;
+        }else{
+            ep.setVisibility(View.VISIBLE);
+            ci.setVisibility(View.VISIBLE);
+        }
         final SharedPreferences prefs = getContext().getSharedPreferences("carpool", MODE_PRIVATE);
         emaill = prefs.getString("email","lol");
 

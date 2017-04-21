@@ -3,12 +3,15 @@ package com.androidbelieve.drawerwithswipetabs;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.toolbox.ImageLoader;
 
@@ -216,7 +219,14 @@ public class YourRideListAdapter extends BaseAdapter {
 
         // title
 
-        title.setText(m.getBemailid() );
+        if(!m.getBemailid().equals(prefs.getString("email",null))){
+            title.setText(m.getBemailid() );
+            emll=m.getBemailid();
+        }
+        else
+        { title.setText(m.getAemailid() );
+            emll=m.getAemailid();
+        }
 
         // rating
         //rating.setText("Source Address: " + String.valueOf(m.getRating()));
@@ -230,20 +240,21 @@ public class YourRideListAdapter extends BaseAdapter {
 
         genreStr = genreStr.length() > 0 ? genreStr.substring(0,
                 genreStr.length() - 2) : genreStr;*/
-     /*   title.setOnClickListener(new View.OnClickListener() {
+       title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AGlobal.em = emll;
 
-                Toast.makeText(con,emll,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(con,emll, Toast.LENGTH_SHORT).show();
                 //FragmentManager fm = fml;
                 ///FragmentTransaction ft=fm.beginTransaction();
+                AGlobal.chdp=1;
                 FragmentTransaction ft = ((FragmentActivity)con).getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.containerView,new LiftProfileViewFragment()).addToBackStack(null).commit();
+                ft.replace(R.id.containerView,new ProfileFragment()).addToBackStack(null).commit();
 
             }
         });
-*/
+
         // release year
         //year.setText(String.valueOf(m.getYear()));
 
